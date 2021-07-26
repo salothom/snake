@@ -1,0 +1,317 @@
+*{
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+    background-color: #FEC0CE;
+    font-family: sans-serif;
+}
+#snake-content {
+	display: block;
+	width: 80%;
+	height: 1200px;
+	margin: 0 auto;
+	zoom: 75%;
+}
+
+#game-container {
+	position: relative;
+	padding-top: 70px;
+	float: left;
+    background-color: #643A71;
+    	width: 1000px;
+	max-width: 50%;
+	height: 1000px;
+	margin: 10px auto;
+}
+
+.block-line{
+	display: flex;
+}
+
+.game-block{
+	background-color: #643A71;
+}
+
+.snake{
+	background-color: #FEC0CE;
+
+}
+
+.apple{
+    background-color: darkgreen;
+    border-radius: 70%;
+}
+
+.start{
+    display: flex;
+    justify-content: center;
+}
+
+#score{
+    background-color: #E3879E;
+    width: 100%;
+    padding: 15px;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 40px;
+    color: #3C1053;
+}
+
+fieldset, button{
+	padding: 7px;
+	width: 300px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 24px;
+}
+
+#snake-content h2{
+	margin-left: 60%;
+	text-align: center;
+	font-size: 60px;
+}
+
+#leaderboard{
+	float: right;
+	background-color:#D29F13;
+	width: 40%;
+	height: 1000px;
+	margin: 10px auto;
+	color: #3C1053;
+	font-size: 58px;
+}
+
+#leaderboard::after, #game-container::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+
+.score-block{
+    display:inline-block;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+
+/* pop-up */
+
+#pop-up{
+	font-family: Calibri, sans-serif;
+  font-weight: normal;
+  color: #333;
+  position: relative;
+  top: -1800px;
+  width: 500px;
+	height: 200px;
+  margin: 0 auto;
+  text-align: center;
+	color: #3C1053;
+	animation: drops 1.0s ease forwards;
+}
+
+#pop-up .container{
+  background: #EEE;
+  padding: 30px;
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+#pop-up input{
+  padding: 10px;
+	width: 250px;
+  border: 0;
+  border-radius: 10px 10px;
+  border: 1px solid #333;
+  font-size: 14px;
+	text-align: center;
+}
+
+button{
+    padding: 16px;
+    border: 0;
+    margin: 30px;
+    background: #E3879E;
+    margin-top: 10px;
+    border-radius: 10px 10px;
+    font-size: 28px;
+    color: #3C1053;
+}
+
+.cross{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #555;
+  color: #ddd;
+  font-weight: bold;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  border-radius: 11px;
+	cursor: pointer;
+}
+
+.red::placeholder {
+  color: red;
+  font-weight: bold;
+}
+
+#pop-up-bg {
+	width: 100%;
+	height: 120%;
+	opacity: 0.7;
+	background-color: black;
+	position: absolute;
+	top: 0;
+}
+
+#countdown {
+    width: 100%;
+    height: 100%;
+    opacity: .4;
+    position: absolute;
+    top: 20%;
+    left: 0%;
+    font-size: 200pt;
+    font-family: monospace;
+    text-align: center;
+    color: crimson;
+    display: none;
+}
+
+#mute {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.smiley {
+    height: 100px;
+    width: 100px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    position: relative;
+}
+
+.smiley:before {
+    content: "";
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    position: absolute;
+    border: 2px solid #000;
+    left: 15px;
+    top: 30px;
+}
+.smiley:before{ 
+content: "";
+height: 10px;
+width: 10px;
+border-radius: 50%;
+position: absolute;
+border: 2px solid #000;
+background-color: aliceblue;
+    left: 16px;
+top: 5px;
+}
+
+.smiley:after {
+content: "";
+height: 10px;
+width: 10px;
+border-radius: 50%;
+position: absolute;
+border: 2px solid #000;
+background-color: aliceblue;
+
+right: 19px;
+top: 5px;
+}
+
+/*Animations*/
+@keyframes drops {
+	0% {opacity: 0;}
+	70% { transform: translateY(1200px); }
+	100% { transform: translateY(1150px); opacity: 1;}
+}
+
+@keyframes fadeOut {
+	from {}
+	to { opacity: 0;}
+}
+
+
+@media screen and (max-width: 2400px) {
+	#snake-content {
+		display: block;
+		width: 90%;
+		min-width: 768px;
+		height: 1200px;
+		margin: 0 auto;
+		zoom: 75%;
+	}
+
+	#game-container {
+		position: static;
+		margin: 0 auto;
+		float: none;
+		width: 70%;
+		max-width: 100%;
+		height: 100%;
+	}
+
+	#snake-content h2{
+		margin-left: 00%;
+		text-align: center;
+		font-size: 60px;
+		position: relative;
+	}
+
+	#leaderboard{
+		background-color:#D29F13;
+		position: relative;
+		width: 100%;
+		float: none;
+		height: 700px;
+		margin: 10px auto;
+		color: #3C1053;
+		font-size: 40px;
+	}
+}
+
+@media screen and (max-width: 2100px) {
+	#snake-content {
+		zoom: 50%;
+		width: 80%
+	}
+
+	#game-container {
+		width: 100%;
+
+	}
+
+	#game {
+		width:1000px;
+		margin: 0 auto;
+	}
+
+	#pop-up{
+		animation: dropsMobile 1.0s ease forwards;
+	}
+
+		@keyframes dropsMobile {
+			0% {opacity: 0;}
+			70% { transform: translateY(1500px); }
+			100% { transform: translateY(1450px); opacity: 1;}
+		}
+}
