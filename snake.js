@@ -123,6 +123,7 @@ function Snake(lengthArr, currentDirection, bufferedDirection, speedValue) {
 
       gameApple.location.classList.add("smiley");
       gameApple.location.classList.add("snake");
+      
       gameApple.reassign();
       this.updateSpeed();
       scoreUpdate.call(this);
