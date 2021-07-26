@@ -15,7 +15,9 @@ body {
 	margin: 0 auto;
 	zoom: 75%;
 }
-
+.scorebabe{
+    padding 5px;
+}
 #game-container {
 	position: relative;
 	padding-top: 70px;
@@ -60,13 +62,6 @@ body {
     color: #3C1053;
 }
 
-fieldset, button{
-	padding: 7px;
-	width: 300px;
-	margin: 0 auto;
-	text-align: center;
-	font-size: 24px;
-}
 
 #snake-content h2{
 	margin-left: 60%;
@@ -145,6 +140,18 @@ button{
     border-radius: 10px 10px;
     font-size: 28px;
     color: #3C1053;
+    transition-duration: 1s
+}
+
+button:hover{
+    padding: 16px;
+    border: 0;
+    margin: 30px;
+    background: rgb(163, 88, 107);
+    margin-top: 10px;
+    border-radius: 10px 10px;
+    font-size: 28px;
+    color: #3C1053;
 }
 
 .cross{
@@ -196,9 +203,8 @@ button{
 }
 
 .smiley {
-    height: 100px;
-    width: 100px;
-    border: 2px solid #000;
+    /* height: 10/ */
+    /* border: 2px solid #000; */
     border-radius: 50%;
     position: relative;
 }
@@ -304,14 +310,4 @@ top: 5px;
 		width:1000px;
 		margin: 0 auto;
 	}
-
-	#pop-up{
-		animation: dropsMobile 1.0s ease forwards;
-	}
-
-		@keyframes dropsMobile {
-			0% {opacity: 0;}
-			70% { transform: translateY(1500px); }
-			100% { transform: translateY(1450px); opacity: 1;}
-		}
 }

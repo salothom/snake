@@ -1,6 +1,6 @@
 var gameContainer = document.getElementById("game-container");
 var allBlocksArray = [];
-
+var score = 0;
 //Game Grid
 gameGrid(30, 30);
 
@@ -46,10 +46,12 @@ function Snake(lengthArr, currentDirection, bufferedDirection, speedValue) {
       snakeSegment = document.getElementById(
         "block-number-" + this.lengthArr[i]
       );
-    //   if (i = 1) {
-        snakeSegment.classList.add("smiley");
-    //     console.log("hi");
-    //   }
+      snakeSegment.classList.remove("smiley");
+
+      snakeSegment1 = document.getElementById(
+        "block-number-" + this.lengthArr[this.lengthArr.length - 1]
+      );
+      snakeSegment1.classList.add("smiley");
       snakeSegment.classList.add("snake");
     }
   };
@@ -111,13 +113,17 @@ function Snake(lengthArr, currentDirection, bufferedDirection, speedValue) {
     if (testValid == null || testValid.classList.contains("snake")) {
       gameOver.call(this);
     } else if (testValid.classList.contains("apple")) {
+     
+      console.log(testValid)
+      testValid.classList.remove("smiley");
+      console.log(testValid)
+
       gameApple.location.classList.remove("apple");
+      testValid.classList.remove("smiley");
+
+      gameApple.location.classList.add("smiley");
       gameApple.location.classList.add("snake");
       gameApple.reassign();
-      soundGrabApple.play();
-      soundBackgoundMusic.sound.playbackRate = (
-        soundBackgoundMusic.sound.playbackRate + 0.005
-      ).toFixed(4);
       this.updateSpeed();
       scoreUpdate.call(this);
     } else {
@@ -129,6 +135,7 @@ function Snake(lengthArr, currentDirection, bufferedDirection, speedValue) {
 
       this.lengthArr.shift();
     }
+    score = lengthArr - 8;
   };
 }
 
@@ -211,41 +218,18 @@ function gameOver() {
   clearInterval(this.speed);
 
   var finalScore;
-  //   fetch(
-  //     "https://us-central1-snake-game-1bf7b.cloudfunctions.net/gameOver?userID=" +
-  //       gameSessionID
-  //   )
-  //     .then(res => {
-  //       return res.json();
-  //     })
-  //     .then(data => {
-  console.log("Final Score: ", data.score);
-  finalScore = data.score;
-  alert("Your Score was: " + finalScore + "\n press 'OK' to restart");
+
+  //   console.log("Final Score: ", data.score);
+  finalScore = score;
+  //   alert("Your Score was: " + score);
   setTimeout(function() {
     location.reload();
   }, 1000);
-  //   return;
-  // });
 }
 
 //Points
 var points = document.getElementById("points");
 var lastTime = timeStamp();
-
-function scoreUpdate() {
-  //   fetch(
-  //     "https://us-central1-snake-game-1bf7b.cloudfunctions.net/scoreUpdate?userID=" +
-  //       gameSessionID
-  //   )
-  //     .then(res => {
-  //       return res.json();
-  //     })
-  //     .then(data => {
-  //       console.log(data);
-  points.innerHTML = data.newScore;
-  // });
-}
 
 function timeStamp() {
   var d = new Date();
@@ -304,12 +288,12 @@ function countdown() {
   countdownTimer.style.display = "block";
   var count = 3;
   var counter = setInterval(function() {
-    if (countdownTimer.innerHTML === "Begin!") {
+    if (countdownTimer.innerHTML === "Go!") {
       countdownTimer.style.display = "none";
       clearInterval(counter);
     } else if (countdownTimer.innerHTML === "1") {
-      countdownTimer.style.fontSize = "150px";
-      countdownTimer.innerHTML = "Begin!";
+      //   countdownTimer.style.fontSize = "150px";
+      countdownTimer.innerHTML = "Go!";
     } else {
       countdownTimer.innerHTML = count;
       count--;
