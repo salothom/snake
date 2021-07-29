@@ -8,6 +8,7 @@ body {
     background-color: #FEC0CE;
     font-family: sans-serif;
 }
+
 #snake-content {
 	display: block;
 	width: 80%;
@@ -15,6 +16,7 @@ body {
 	margin: 0 auto;
 	zoom: 75%;
 }
+
 .scorebabe{
     padding: 5px;
 }
