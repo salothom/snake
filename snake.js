@@ -31,9 +31,9 @@ function gameGrid(height, width) {
   }
 }
 
-//Snake & Apple Start Position and Render
+//Worm & Apple Start Position and Render
 
-function Snake(lengthArr, currentDirection, bufferedDirection, speedValue) {
+function Worm(lengthArr, currentDirection, bufferedDirection, speedValue) {
   this.lengthArr = lengthArr;
 
   this.currentDirection = currentDirection;
@@ -43,16 +43,16 @@ function Snake(lengthArr, currentDirection, bufferedDirection, speedValue) {
 
   this.shading = () => {
     for (i = 0; i < this.lengthArr.length; i++) {
-      snakeSegment = document.getElementById(
+      wormSegment = document.getElementById(
         "block-number-" + this.lengthArr[i]
       );
-      snakeSegment.classList.remove("smiley");
+      wormSegment.classList.remove("smiley");
 
-      snakeSegment1 = document.getElementById(
+      wormSegment1 = document.getElementById(
         "block-number-" + this.lengthArr[this.lengthArr.length - 1]
       );
-      snakeSegment1.classList.add("smiley");
-      snakeSegment.classList.add("snake");
+      wormSegment1.classList.add("smiley");
+      wormSegment.classList.add("snake");
     }
   };
 
@@ -113,26 +113,23 @@ function Snake(lengthArr, currentDirection, bufferedDirection, speedValue) {
     if (testValid == null || testValid.classList.contains("snake")) {
       gameOver.call(this);
     } else if (testValid.classList.contains("apple")) {
-     
-      console.log(testValid)
       testValid.classList.remove("smiley");
-      console.log(testValid)
 
       gameApple.location.classList.remove("apple");
       testValid.classList.remove("smiley");
 
       gameApple.location.classList.add("smiley");
       gameApple.location.classList.add("snake");
-      
+
       gameApple.reassign();
       this.updateSpeed();
       scoreUpdate.call(this);
     } else {
-      var snakeSegment = document.getElementById(
+      var wormSegment = document.getElementById(
         "block-number-" + this.lengthArr[0]
       );
-      snakeSegment.classList.remove("snake");
-      snakeSegment.classList.remove("smiley");
+      wormSegment.classList.remove("snake");
+      wormSegment.classList.remove("smiley");
 
       this.lengthArr.shift();
     }
@@ -171,7 +168,7 @@ function Apple(location) {
   };
 }
 
-var gameSnake = new Snake(
+var gameWorm = new Worm(
   [2210, 2211, 2212, 2213, 2214, 2215, 2216, 2217],
   "right",
   "right",
@@ -187,7 +184,7 @@ function speedScreenSize() {
   }
 }
 
-gameSnake.shading();
+gameWorm.shading();
 
 gameApple.shade();
 
@@ -197,19 +194,19 @@ window.addEventListener("keydown", function(e) {
   switch (key) {
     case 37:
       e.preventDefault();
-      gameSnake.bufferedDirection = "left";
+      gameWorm.bufferedDirection = "left";
       break;
     case 38:
       e.preventDefault();
-      gameSnake.bufferedDirection = "up";
+      gameWorm.bufferedDirection = "up";
       break;
     case 39:
       e.preventDefault();
-      gameSnake.bufferedDirection = "right";
+      gameWorm.bufferedDirection = "right";
       break;
     case 40:
       e.preventDefault();
-      gameSnake.bufferedDirection = "down";
+      gameWorm.bufferedDirection = "down";
       break;
   }
 });
@@ -219,13 +216,15 @@ function gameOver() {
   clearInterval(this.speed);
 
   var finalScore;
+//   gameOverText();
 
   //   console.log("Final Score: ", data.score);
   finalScore = score;
-  //   alert("Your Score was: " + score);
+    alert("Your Score was: " + score);
   setTimeout(function() {
     location.reload();
   }, 1000);
+
 }
 
 //Points
@@ -261,42 +260,43 @@ init.addEventListener("keyup", function(e) {
 });
 
 function startGame() {
-  // document.querySelector("#pop-up-bg").style.animation =
-  //   "fadeOut 3s ease forwards";
-  // document.querySelector("#pop-up").style.display = "none";
-  userInitials = "COW"; //inpInt.value.toUpperCase();
+
+  userInitials = "COW"; 
   setTimeout(function() {
-    gameSnake.speed = setInterval(gameSnake.motion, gameSnake.speedValue);
+    gameWorm.speed = setInterval(gameWorm.motion, gameWorm.speedValue);
   }, 5000);
   countdown();
-  // fetch(
-  //   "https://us-central1-snake-game-1bf7b.cloudfunctions.net/newGameSession?init=" +
-  //     userInitials
-  // )
-  //   .then(res => {
-  //     return res.json();
-  //   })
-  //   .then(data => {
-  //     console.log(data);
-  //     points.innerHTML = data.score;
-  //     gameSessionID = data.userID;
-  //   });
-  //   }
+}
+
+function gameOverText() {
+  var endGame = document.querySelector("#countdown");
+  endGame.style.display = "block";
+  var count = 0;
+  var done = setInterval(function() {
+    if (endGame.innerHTML === "OUCH!") {
+      endGame.innerHTML = "OUCH!";
+    } else if(count >5) {
+        endGame.style.display = "none";
+      clearInterval(done);
+    }
+    count = count +1;
+  }, 1000);
+  endGame.style.display = "none";
 }
 
 function countdown() {
-  var countdownTimer = document.querySelector("#countdown");
-  countdownTimer.style.display = "block";
+  var starterClock = document.querySelector("#countdown");
+  starterClock.style.display = "block";
   var count = 3;
   var counter = setInterval(function() {
-    if (countdownTimer.innerHTML === "Go!") {
-      countdownTimer.style.display = "none";
+    if (starterClock.innerHTML === "Go!") {
+      starterClock.style.display = "none";
       clearInterval(counter);
-    } else if (countdownTimer.innerHTML === "1") {
-      //   countdownTimer.style.fontSize = "150px";
-      countdownTimer.innerHTML = "Go!";
+    } else if (starterClock.innerHTML === "1") {
+      //   starterClock.style.fontSize = "150px";
+      starterClock.innerHTML = "Go!";
     } else {
-      countdownTimer.innerHTML = count;
+      starterClock.innerHTML = count;
       count--;
     }
   }, 1000);
@@ -306,6 +306,6 @@ function countdown() {
 var swipeZone = document;
 swipedetect(swipeZone, function(swipedir) {
   if (swipedir !== "none") {
-    gameSnake.bufferedDirection = swipedir;
+    gameWorm.bufferedDirection = swipedir;
   }
 });
